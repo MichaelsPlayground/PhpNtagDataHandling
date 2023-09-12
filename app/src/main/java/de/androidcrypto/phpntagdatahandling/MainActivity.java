@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String responseBodyString;
     String urlFlutterCrypto = "";
     String sampleFileName = "test.md";
+    String sampleFileName2 = "test2.md";
     Context appContext;
 
     @Override
@@ -70,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 writeToUiAppend("sendHttpPost clicked");
 
-                File file = new File(view.getContext().getFilesDir(), sampleFileName);
-                urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/fileupload.html";
+                File file = new File(view.getContext().getFilesDir(), sampleFileName2);
+                //urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/fileupload.html";
+                urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/fileUploadScript2.php";
                 UploadFileFromOkhttp(file, urlFlutterCrypto);
 
 /*
@@ -96,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 String dataToWrite = "The lazy dog \njumps in the next line\n" + getTimestamp();
                 FileWriter writer = null;
                 try {
-                    File file = new File(view.getContext().getFilesDir(), sampleFileName);
+                    //File file = new File(view.getContext().getFilesDir(), sampleFileName);
+                    File file = new File(view.getContext().getFilesDir(), sampleFileName2);
                     writer = new FileWriter(file);
                     writer.append(dataToWrite);
                     writer.flush();
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setType(MultipartBody.FORM);
         //File file = new File(filePath);
         //builder.addFormDataPart("file", file.getName(), RequestBody.create(file, MediaType.parse("image/*")));
-        builder.addFormDataPart("fileToUpload", file.getName(), RequestBody.create(file, MEDIA_TYPE_MARKDOWN));
+        builder.addFormDataPart("file", file.getName(), RequestBody.create(file, MEDIA_TYPE_MARKDOWN));
         RequestBody requestBody = builder.build();
         Request request = new Request.Builder()
                 .url(url)
