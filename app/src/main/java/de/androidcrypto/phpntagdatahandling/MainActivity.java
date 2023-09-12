@@ -3,21 +3,30 @@ package de.androidcrypto.phpntagdatahandling;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -60,14 +69,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 writeToUiAppend("sendHttpPost clicked");
+
+                File file = new File(view.getContext().getFilesDir(), sampleFileName);
+                urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/fileupload.html";
+                UploadFileFromOkhttp(file, urlFlutterCrypto);
+
+/*
                 appContext = view.getContext();
-                urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/get_timestamp_sha.php?uid=01020304050607&mac=a60a107d";
+                urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/fileupload2.html";
+                //urlFlutterCrypto = "http://fluttercrypto.bplaced.net/apps/ntag/get_timestamp_sha.php?uid=01020304050607&mac=a60a107d";
                 try {
                     sendHttpPostAsyncFile();
                 } catch (IOException e) {
                     writeToUiAppend("IOException: " + e.getMessage());
                     //throw new RuntimeException(e);
                 }
+*/
+
             }
         });
 
@@ -75,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 writeToUiAppend("createSampleFile clicked");
-                String dataToWrite = "The lazy dog \njumps in the next line";
+                String dataToWrite = "The lazy dog \njumps in the next line\n" + getTimestamp();
                 FileWriter writer = null;
                 try {
                     File file = new File(view.getContext().getFilesDir(), sampleFileName);
@@ -129,8 +147,59 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         thread.start();
+    }
+
+    // https://stackoverflow.com/a/69523678/8166854
+    //public void UploadFileFromOkhttp(String filePath, String jwtToken) {
+    public void UploadFileFromOkhttp(File file, String url) {
+        System.out.println("UploadFileFromOkhttp started");
+        final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
+        //String url = "https://api.baserow.io/api/user-files/upload-file/";
+        //String url = "http://fluttercrypto.bplaced.net/apps/ntag/fileupload.html";
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        //File file = new File(filePath);
+        //builder.addFormDataPart("file", file.getName(), RequestBody.create(file, MediaType.parse("image/*")));
+        builder.addFormDataPart("fileToUpload", file.getName(), RequestBody.create(file, MEDIA_TYPE_MARKDOWN));
+        RequestBody requestBody = builder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                //.addHeader("Authorization", "JWT " + jwtToken)
+                .post(requestBody)
+                .build();
+        httpClient.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        OnError(e.getMessage());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                final String responseData = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        OnSuccess(responseData);
+                    }
+                });
+            }
+        });
+    }
+
+    private void OnSuccess(String responseData) {
+        System.out.println("*** OnSuccess ***\n" + responseData);
+        writeToUiAppend("*** OnSuccess ***\n" + responseData);
+    }
+
+    private void OnError(String message) {
+        System.out.println("*** OnError ***\n" + message);
+        writeToUiAppend("*** OnError ***\n" + message);
     }
 
 
@@ -210,5 +279,17 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(message);
             }
         });
+    }
+
+    // gives an 19 byte long timestamp yyyy.MM.dd HH:mm:ss
+    public static String getTimestamp() {
+        // gives a 19 character long string
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return ZonedDateTime
+                    .now(ZoneId.systemDefault())
+                    .format(DateTimeFormatter.ofPattern("uuuu.MM.dd HH:mm:ss"));
+        } else {
+            return new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date());
+        }
     }
 }
