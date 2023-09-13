@@ -40,6 +40,19 @@ file_editor2.php : fixed filename test2.md in /uploads folder
 http://fluttercrypto.bplaced.net/apps/ntag/file_editor2.php
 file_editor2_process.php
 
+// ### working code
+select_file4.php : select a file in a fixed directory: uploads and call file_editor4.php
+file_editor4.php : stores the filename in a session variable, read the file content in a textarea for editing
+                   for saving the new content it calls file_editor4_process.php 
+file_editor4_process.php : saves the content to the file and return to file_editor4_.php for continued working
+
+select_file5.php : select a file in a fixed directory: uploads and call file_editor5.php
+file_editor5.php : stores the filename in a session variable, read the file content in a textarea for editing
+                   for saving the new content it calls file_editor5_process.php
+                   new button: select file
+file_editor5_process.php : saves the content to the file and return to file_editor5_.php for continued working
+
+
 
 
 http://fluttercrypto.bplaced.net/apps/ntag/
