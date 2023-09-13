@@ -52,7 +52,17 @@ file_editor5.php : stores the filename in a session variable, read the file cont
                    new button: select file
 file_editor5_process.php : saves the content to the file and return to file_editor5_.php for continued working
 
+auth1.php : basic authentication with username and password, is never called directly but from other files
+            included in auth_select_file1.php
 
+
+auth_select_file1.php
+http://fluttercrypto.bplaced.net/apps/ntag/auth_select_file1.php
+for logout:
+http://fluttercrypto.bplaced.net/apps/ntag/auth_select_file1.php?logout=1
+
+generate_password_hash.php : used to generate passphrase hashes, store them im auth.pass
+http://fluttercrypto.bplaced.net/apps/ntag/generate_password_hash.php
 
 
 http://fluttercrypto.bplaced.net/apps/ntag/
