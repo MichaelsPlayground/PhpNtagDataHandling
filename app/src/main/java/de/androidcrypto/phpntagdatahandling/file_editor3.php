@@ -3,9 +3,9 @@
 $uploadDirectory = "/uploads/";
 $currentDirectory = dirname(__FILE__);
 $fullUploadDirectory = $currentDirectory . $uploadDirectory;
-$fName = "test4.md";
+$fName = "test2.md";
 $fileName = $fullUploadDirectory . $fName;
-//echo "fileName: " . $fileName ."<br />";
+echo "fileName: " . $fileName ."<br />";
 // https://www.youtube.com/watch?v=1vS2KXf0Esc
 if (file_exists($fileName)) {
   $file = $fileName;
@@ -19,7 +19,8 @@ if (file_exists($fileName)) {
 }
 
 ?>
-<form action="file_editor2_process.php" method="post">
+<form action="file_editor3_process.php" method="post">
+  <input type="hidden" name="filename" value="<?php echo $fileName ?>">
   <textarea rows="20" cols="50" name="comment"><?php echo htmlspecialchars($current);?></textarea>
   <input type="submit">
 </form>
