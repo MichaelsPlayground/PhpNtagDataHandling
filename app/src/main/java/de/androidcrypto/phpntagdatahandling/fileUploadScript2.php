@@ -1,8 +1,8 @@
 <?php
+    // this is used by Java sendHttpPost method to upload a file
     // source: https://blog.filestack.com/thoughts-and-knowledge/php-file-upload/
     //$currentDirectory = getcwd();
     $uploadDirectory = "/uploads/";
-
     $currentDirectory = dirname(__FILE__);
     $fullUploadDirectory = $currentDirectory . $uploadDirectory;
 
