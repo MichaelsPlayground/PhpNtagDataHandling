@@ -1,28 +1,27 @@
 <?php
     // source: https://blog.filestack.com/thoughts-and-knowledge/php-file-upload/
     //$currentDirectory = getcwd();
-    $uploadDirectory = "/uploads/";
+    $uploadDirectory = "/images/";
 
     $currentDirectory = dirname(__FILE__);
     $fullUploadDirectory = $currentDirectory . $uploadDirectory;
 
     if (!file_exists($fullUploadDirectory)) {
-        mkdir($fullUploadDirectory, 0777, true);
+        mkdir($fullUploadDirectory, 0755, true);
     }
 
     $errors = []; // Store errors here
 
-    $fileExtensionsAllowed = ['md','jpeg','jpg','png']; // These will be the only file extensions allowed
+    $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed
 
-    $fileName = $_FILES['file']['name'];
-    $fileSize = $_FILES['file']['size'];
-    $fileTmpName  = $_FILES['file']['tmp_name'];
-    $fileType = $_FILES['file']['type'];
+    $fileName = $_FILES['the_file']['name'];
+    $fileSize = $_FILES['the_file']['size'];
+    $fileTmpName  = $_FILES['the_file']['tmp_name'];
+    $fileType = $_FILES['the_file']['type'];
     $fileExtension = strtolower(end(explode('.',$fileName)));
 
     $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName);
-    // uploadPath: /users/fluttercrypto/www/apps/ntag/uploads/test3.md
-    echo 'uploadPath: ' . $uploadPath . "\n";
+    echo 'uploadPath: ' . $uploadPath ."<br />";
     if (isset($_POST['submit'])) {
 
       if (! in_array($fileExtension,$fileExtensionsAllowed)) {
@@ -35,16 +34,17 @@
 
       if (empty($errors)) {
         $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-        echo 'didUpload: ' . $didUpload . "\n";
+
         if ($didUpload) {
-          echo "The file " . basename($fileName) . " has been uploaded";
+          echo "The file " . basename($fileName) . " has been uploaded" ."<br />";
         } else {
-          echo "An error occurred. Please contact the administrator.";
+          echo "An error occurred. Please contact the administrator." . "<br />";
         }
       } else {
         foreach ($errors as $error) {
-          echo $error . "These are the errors" . "\n";
+          echo $error . "These are the errors" ."<br />";
         }
       }
+
     }
 ?>
