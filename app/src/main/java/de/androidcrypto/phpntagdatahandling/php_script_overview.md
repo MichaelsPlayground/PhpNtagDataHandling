@@ -94,10 +94,20 @@ image_upload_script3.php : called by imageupload3.html, writes the image to imag
 create_images_subdirectory.php : creates a subdirectory under images
 http://fluttercrypto.bplaced.net/apps/ntag/create_images_subdirectory.php
 
+1-gallery.php : shows the images in images/folder2 as thumbnail and full resolution
+                uses 1b-gallery.css and 1c-gallery.js
+http://fluttercrypto.bplaced.net/apps/ntag/1-gallery.php
+
+2-caption-gallery.php : shows the images in images/folder1 as thumbnail and full resolution. The
+                        thumbnails have the filename as caption
+                        uses 2b-caption.gallery.css and 1c-gallery.js
+http://fluttercrypto.bplaced.net/apps/ntag/2-caption-gallery.php
+
+
 =========================================
 Main menu handling
 
-main_menu.php : The main menu of the project, protected by auth2.php
+main_menu.php : The main menu of the project, protected by auth2.php (test 1234)
 http://fluttercrypto.bplaced.net/apps/ntag/main_menu.php
 =========================================
 
