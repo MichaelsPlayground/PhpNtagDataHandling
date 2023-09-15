@@ -60,9 +60,28 @@ additional tags just need the storage unit number).
 
 Especially when working with images during the first filling of a storage room there a some megabyte of data that needs to get transferred 
 to the backend server. For that reason the previous phase was an offline phase but now we need a (fast) internet connection to send all 
-of the data to the backend server. When making the photos you need to assign them to a storage unit number 
+of the data to the backend server. When making the photos you need to assign them to a storage unit number and during upload phase this 
+assignment is transferred to the backend server.
 
+### Data processing phase
 
+This is the part that has the largest "todo" factor. Maybe you wrote the cardboard's content on several paper but now it's the time to 
+write down all information to the database using you PC. Maybe you're already having a Word or Pages document that acts like a content 
+management and you can simply copy & paste the content information from the Word document to the content database. This is an online phase.
 
+### Data finalization phase
 
+This is a kind of cleanup phase: on your PC you find all NFC tags that are not coupled to a storage unit number so far or do have an 
+empty content database entry. This is an online phase. 
 
+Of course you can always upload images of contents to the backend server database - even during initial storage phase.
+
+### Data deletion phase
+
+During lifetime of your storage project some cardboard's will get emptied or repacked and this done in this phase. This is a semi 
+online phase as nearly no new data (e.g. images) need to get transferred.
+
+## Password based security
+
+As the backend server usually is a public available one the access to the backend server data is secured by a **password based access 
+system**. You may consider to secure the apps access by using a fingerprint access.
