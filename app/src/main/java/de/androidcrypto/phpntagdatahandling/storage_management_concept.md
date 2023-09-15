@@ -20,7 +20,7 @@ all (cardboards and signle objects) will get a unique number: **storage unit**
 
 The concept uses 4 components that work together:
 
-- **NFC-Sticker**: the work is based on NFC tags of type NTAG21x, preferable NTAG213 as they are the cheapest ones. I'm using 
+- **NFC-Sticker**: the work is based on NFC tags of type **NTAG21x**, preferable NTAG213 as they are the cheapest ones. I'm using 
 stickers that get sticked on the surface of any storage goods. You can use up to 3 sticker for the same storage unit
 - **Android smartphone**: As the chosen tags are using the **NfcA** technology they are read- and writable with every smartphone
   (device) that has NFC capabilities. The device is used to personalize and registration of the tags to the backend service, 
