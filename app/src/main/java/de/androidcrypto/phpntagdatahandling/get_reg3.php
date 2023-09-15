@@ -15,11 +15,18 @@ $mac = $_GET['mac'];
 // 01020304050607 gives 78339717 (first 8 chars)
 // 11020304050607 gives sha256: 44a852f03a6370ca0286d8abe9150e3acd5f9cc87f2a74a1756ecae2f3e2b8e6:44a852f03a6370ca0286d8abe9150e3acd5f9cc87f2a74a1756ecae2f3e2b8e6
 // 11020304050607 gives sha256: 44a852f0
-$uidMac = hash('sha256', $uid, true);
+echo "uid received:".$uid."<br />";
+echo "mac received:".$mac."<br />";
+$uidBin = hex2bin($uid);
+//$uidMac = hash('sha256', $uid, true);
+$uidMac = hash('sha256', $uidBin, true);
 $uidMacHex = bin2hex($uidMac);
-echo "$uidMacHex:".$uidMacHex."<br />";
+
+echo "uidMacHex:".$uidMacHex."<br />";
 $uidMacHex8Chars = substr($uidMacHex, 0, 8);
-echo "$uidMacHex8Chars:".$uidMacHex8Chars."<br />";
+echo "mac calcultd:".$uidMacHex8Chars."<br />";
+echo "uidMacHex8Chars:".$uidMacHex8Chars."<br />";
+
 if ($uidMacHex8Chars == $mac) {
     echo "mac is VERIFIED"."<br />";
 } else {
@@ -39,8 +46,8 @@ if ($uid == null) {
   if ($handle) {
 	  $line = PHP_EOL . $uid;
     $writeResult = fwrite($handle, $line);
+    fclose($handle);
   }
-fclose($handle);
 
 $message = $_GET['message'];
 
