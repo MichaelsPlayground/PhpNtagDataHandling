@@ -19,7 +19,6 @@
     <li><a href="select_file5.php">edit a document file</a></li>
     <li><a href="fileupload2.html">upload a document file</a></li>
     <li><a href="imageupload3.php">upload an image file</a></li>
-    <li><a href="bulkuidupload1.php">upload a bulk file with tagUIDs</a></li>
     <li><a href="create_images_subdirectory.php">create an images subdirectory</a></li>
     <li><a href="generate_password_hash.php">Generate a new passphrase hash</a></li>
     <li><a href="zip_download.php">download zipped documents (immediately)</a></li>

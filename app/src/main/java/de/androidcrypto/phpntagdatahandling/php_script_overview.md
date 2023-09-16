@@ -103,6 +103,14 @@ http://fluttercrypto.bplaced.net/apps/ntag/1-gallery.php
                         uses 2b-caption.gallery.css and 1c-gallery.js
 http://fluttercrypto.bplaced.net/apps/ntag/2-caption-gallery.php
 
+=========================================
+
+upload functions:
+
+bulkuidupload1.php : upload a bulk file with tag UID data for register
+http://fluttercrypto.bplaced.net/apps/ntag/bulkuidupload1.php
+bulk_uid_upload_script1.php
+
 
 =========================================
 Main menu handling
