@@ -129,3 +129,24 @@ ntag/images is manually created, .htaccess ??
 
 download sample images (bulk): https://unsample.net/
 
+## Database handling
+
+Database: https://sleekdb.github.io/
+
+https://github.com/rakibtg/SleekDB 
+
+Unzip the database file with script: unzip_file_same_folder.php
+
+http://fluttercrypto.bplaced.net/apps/ntag/db/unzip_file_same_folder.php
+
+http://fluttercrypto.bplaced.net/apps/ntag/unzip_file_same_folder.php
+
+http://fluttercrypto.bplaced.net/apps/ntag/scandir.php
+
+http://fluttercrypto.bplaced.net/apps/ntag/db_insert_one_document.php
+
+http://fluttercrypto.bplaced.net/apps/ntag/db_retrieving_documents_store_class.php
+
+
+
+
